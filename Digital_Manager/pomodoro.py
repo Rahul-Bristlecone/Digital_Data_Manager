@@ -10,7 +10,7 @@ try:
 except:
     pass
 
-
+# Test for DB
 class TimerWindow(tk.Tk):
     def __init__(self):
         super().__init__()
