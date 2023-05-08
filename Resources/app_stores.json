@@ -1,0 +1,48 @@
+{
+    "name": "MamaEarth",
+    "products":
+    [
+        {
+            "range": "Aloe vera",
+            "details":
+            [
+                {
+                    "category": "face",
+                    "Description":
+                    {
+                        "gender": "men",
+                        "product_type": "Moisturiser",
+                        "price": 256.80,
+                        "quantity": 80
+                    }
+                },
+                {
+                    "category": "Body",
+                    "Description":
+                    {
+                        "gender": "men",
+                        "product_type": "Body Lotion",
+                        "price": 199,
+                        "quantity": 200
+                    }
+                }
+            ]
+        },
+        {
+            "range": "Vitamin C",
+            "Details":
+            [
+                {
+                    "category": "Serum",
+                    "Description":
+                    {
+                        "gender": "women",
+                        "type": "face",
+                        "price": 459.80,
+                        "quantity": 100
+                    }
+                }
+            ]
+        }
+    ]
+}
