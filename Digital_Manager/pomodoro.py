@@ -10,8 +10,8 @@ try:
 except:
     pass
 
-# Test for DB test1
-#asasa
+
+# File reformatted
 class TimerWindow(tk.Tk):
     def __init__(self):
         super().__init__()
