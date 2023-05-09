@@ -11,7 +11,6 @@ except:
     pass
 
 
-# Fetch first
 class TimerWindow(tk.Tk):
     def __init__(self):
         super().__init__()
