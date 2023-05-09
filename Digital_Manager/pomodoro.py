@@ -11,7 +11,7 @@ except:
     pass
 
 
-# File reformatted
+# Branch testing
 class TimerWindow(tk.Tk):
     def __init__(self):
         super().__init__()
