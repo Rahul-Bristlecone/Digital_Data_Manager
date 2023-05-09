@@ -11,6 +11,7 @@ except:
     pass
 
 
+# File reformatted
 class TimerWindow(tk.Tk):
     def __init__(self):
         super().__init__()
