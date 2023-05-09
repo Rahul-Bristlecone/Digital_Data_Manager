@@ -14,6 +14,7 @@ except:
 # This is the main window which will contain the timer frame which has all application related widgets
 # Now testing....
 # final testing for rebase and remote branch RS_202_dev
+# dev_progress will be directly pushed to remote head (which is RS_202_dev)
 class TimerWindow(tk.Tk):
     def __init__(self):
         super().__init__()
