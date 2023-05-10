@@ -16,8 +16,10 @@ except:
 # final testing for rebase and remote branch RS_202_dev
 # dev_progress will be directly pushed to remote head (which is RS_202_dev)
 # Try to push directly to remote head through new branch
+
 # Testing RS_202_QA created from master -
 # Rebase......
+
 class TimerWindow(tk.Tk):
     def __init__(self):
         super().__init__()
