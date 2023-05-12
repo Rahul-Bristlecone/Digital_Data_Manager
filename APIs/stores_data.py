@@ -1,2 +1,3 @@
 stores = {}
-items = {}
+product = {}
+product_ranges = {}
