@@ -10,15 +10,15 @@ if __name__ == '__main__':
 
 
 class HomePage(tk.Tk):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self):
+        super().__init__()
         # self.onclick = None
         self.converter_image = None
         self.title("Home Page")
         self.geometry("320x400")
 
         def open_converter():
-            objconveter = tk.Toplevel(unit_converter.UnitConverter())
+            objconveter = tk.Toplevel(unit_converter.ConverterWindow())
             objconveter.grab_set()
 
         self.converter_image = ImageTk.PhotoImage(Image.open('../Icons/converter.png').resize((75, 75)))

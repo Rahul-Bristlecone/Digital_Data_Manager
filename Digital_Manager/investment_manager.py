@@ -13,7 +13,7 @@ class InvestmentTrackerWindow(tk.Tk):
         super().__init__()
         self.title("INVESTMENT TRACKER")
         self.geometry("320x460")
-        self.iconbitmap("C:\\Users\\Rahul.Sharma4\\PycharmProjects\\pythonProject1\\Icons\\briefcase.ico")
+        self.iconbitmap("../Icons/briefcase.ico")
 
         main_frame = InvestmentTrackerFrame(self)
         main_frame.grid()

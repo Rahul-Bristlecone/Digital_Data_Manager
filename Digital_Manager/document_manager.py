@@ -12,7 +12,7 @@ except:
 
 main = tk.Tk()
 main.title("DOCUMENT MANAGER")
-main.iconbitmap("C:\\Users\\Rahul.Sharma4\\PycharmProjects\\pythonProject1\\Icons\\briefcase.ico")
+main.iconbitmap("../Icons/briefcase.ico")
 main.geometry('320x450')
 main.resizable(False, False)
 

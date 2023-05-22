@@ -18,7 +18,7 @@ except:
 
 dashboard = tk.Tk()
 dashboard.title("PERSONAL DIGITAL MANAGER")
-dashboard.iconbitmap("C:\\Users\\Rahul.Sharma4\\PycharmProjects\\pythonProject1\\Icons\\briefcase.ico")
+dashboard.iconbitmap("../Icons/briefcase.ico")
 dashboard.geometry('337x600')
 dashboard.resizable(False, False)
 

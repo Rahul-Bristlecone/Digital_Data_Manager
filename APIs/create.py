@@ -1,7 +1,7 @@
 import uuid
 
 from flask import Flask, request
-from stores_data import stores, product, product_ranges
+from APIs.resources.stores_data import stores, product
 from flask_smorest import abort
 
 create = Flask(__name__)
@@ -26,6 +26,7 @@ def get_store(store_id):
 # Retrieve all items
 @create.get("/products")
 def get_all_item():
+    # return "Hello world"
     return {"products": list(product.values())}
 
 
@@ -84,7 +85,7 @@ def create_item():
         abort(400, message="Bad request. store_id, range should be included")
 
     # Check for Duplicate values
-    for i in product.values():  # product dict contains the store id
+    for i in product.values():  # product.values is a list of dictionary in itself
         if (product_data["store_id"] == i["store_id"] and
                 product_data["range"] == i["range"]):
             abort(400, message="Bad request. Product already exists")  # TODO abort message to be displayed in json
@@ -122,11 +123,18 @@ def update_product(product_id):
             "range" not in request_data):
         return {"message": "Keys not available"}
 
+    # Validating if a product is part of some store (exists)
+    for i in product.values():  # product.values is a list of dictionary in itself
+        if (request_data["store_id"] == i["store_id"] and
+                request_data["range"] == i["range"]):
+            return {"message": "Product already exist"}
+            # abort(400, message="Bad request. Product already exists") TODO abort message to be displayed in json
+
     try:
         item = product[product_id]  # How item is a dictionary
         item |= request_data
         return item
     except KeyError:
-        return {"message": "pakistan"}
+        return {"message": "Key does not exist"}
 
 # TODO Retrieve items of a single store

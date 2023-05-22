@@ -25,7 +25,7 @@ class TimerWindow(tk.Tk):
         super().__init__()
         self.title("TIMER")
         self.geometry("240x360")
-        self.iconbitmap("C:\\Users\\Rahul.Sharma4\\PycharmProjects\\pythonProject1\\Icons\\briefcase.ico")
+        self.iconbitmap("../Icons/briefcase.ico")
         self.resizable(False, False)
 
         timer_frame = TimerFrame(self)

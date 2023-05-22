@@ -19,7 +19,7 @@ class GlamWindow(tk.Tk):
 
         self.title("PERSONAL CARE MANAGER")
         self.geometry("380x520")
-        self.iconbitmap("C:\\Users\\Rahul.Sharma4\\PycharmProjects\\pythonProject1\\Icons\\briefcase.ico")
+        self.iconbitmap("../Icons/briefcase.ico")
 
         glam_frame = GlamBookFrame(self)
         glam_frame.grid()
