@@ -1,7 +1,7 @@
 import uuid
 
 from flask import Flask, request
-from APIs.resources.stores_data import stores, product
+from APIs.resources.db import stores, product
 from flask_smorest import abort
 
 create = Flask(__name__)
