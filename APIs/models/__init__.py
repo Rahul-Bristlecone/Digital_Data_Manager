@@ -1,4 +1,4 @@
-from APIs.models.item import ItemModel
-from APIs.models.stores import StoreModel
+from APIs.models.item_db import ItemModel
+from APIs.models.store_db import StoreModel
 
 
