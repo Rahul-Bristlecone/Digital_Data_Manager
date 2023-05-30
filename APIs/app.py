@@ -30,7 +30,7 @@ with open("resources/app_stores.json", 'r') as store_data:
     print(type(store_list))
 
 
-# Retrieve all stores only - not a specific store
+# Retrieve all stores
 @app.get("/stores")
 def get_stores():
     # return store_list[0] - return first store (which is dictionary in itself)
@@ -41,11 +41,8 @@ def get_stores():
     return store_list  # return list of stores
 
 
-get_stores()
-
-
 # Retrieve a specific store
-@app.get("/stores/<string:name>")
+@app.get("/store/<string:name>")
 def get_store(name):
     for store_name in store_list:
         if store_name["name"] == name:
@@ -53,16 +50,55 @@ def get_store(name):
     return {"message": "Store does not exist"}, 404
 
 
-# Get all items of a specific store
-@app.get("/stores/<string:name>/items")
-def get_items(name):
-    for store_name in store_list:  # store_name is a dictionary
-        if store_name["name"] == name:
-            return store_name["products"]  # This will return a list
+# Create a new store
+@app.post("/store")  # TODO using query string parameters like ?name=OrganicHarvest
+def create_store():
+    request_data = request.get_json()
+    # new_store = {"name": request_data["name"], "products": request_data["products"]}
+    store_list.append(request_data)
+    # print(store_list)
+    return request_data, 201
+
+
+# Update an existing store
+@app.put("/store/<string:store_name>")
+def update_store(store_name):
+    request_data = request.get_json()
+    for store_name in store_list:
+        if store_name["name"] == request_data["name"]:
+            store_name |= request_data
+            return store_list
+
+
+# Delete an existing store
+@app.delete("/store/<string:store_name>")
+def delete_store(store_name):
+    request_data = request.get_json()
+    for store_name in store_list:
+        if store_name["name"] == request_data["name"]:
+            store_list.remove(store_name)
+            return store_list
+
+
+# Get all products of a specific store
+@app.get("/<string:store_name>/products")
+def get_products(store_name):
+    for store in store_list:  # store_name is a dictionary
+        if store["name"] == store_name:
+            return store["products"]  # This will return a list
     return {"message": "Store does not exist"}, 404
 
 
-# Retrieve all the product ranges, for which items are available in a specific store
+# get a specific product (range) from a store
+@app.get("/<string:store_name>/<string:product_name>")  # this is better implemented using product_id
+def get_product(store_name, product_name):
+    for store in store_list:  # store is a dictionary
+        if store["name"] == store_name:
+            for product in store["products"]:
+                if product["range"] == product_name:
+                    return product
+
+
 @app.get("/stores/<string:name>/items/range")
 def get_all_ranges(name):
     ranges = []
@@ -78,24 +114,48 @@ def get_all_ranges(name):
 get_all_ranges("MamaEarth")
 
 
-# Create a new store
-@app.post("/store")  # TODO using query string parameters like ?name=OrganicHarvest
-def create_store():
+# Create single/multiple product for a specific store
+@app.post("/<string:store_name>/product")  # TODO using query string parameters like ?item name=Vitamin C
+def create_product(store_name):
     request_data = request.get_json()
-    new_store = {"name": request_data["name"], "products": request_data["products"]}
-    store_list.append(new_store)
-    # print(store_list)
-    return new_store, 201
+    for store in store_list:
+        if store["name"] == store_name and request_data["products"] != []:
+            for i in range(len(request_data["products"])):
+                new_product = {"range": request_data["products"][i]["range"],
+                               "details": request_data["products"][i]["details"]}  # TODO add item with full details
+                store["products"].append(new_product)
+            return store["products"], 201
+    return {"message": "store does not exist"}, 404
 
 
-# Create a product inside a specific store
-@app.post("/store/<string:name>/item")  # TODO using query string parameters like ?item name=Vitamin C
-def create_product(name):
+# update all products for a specific store
+@app.put(
+    "/<string:store_name>/product/<string:product_range>")  # TODO using query string parameters like ?item name=Vitamin C
+def update_product(store_name, product_range):
     request_data = request.get_json()
-    for store_name in store_list:
-        if store_name["name"] == name:
-            new_item_details = {"range": request_data['range'],
-                                "details": request_data['details']}  # TODO add item with full details
-            store_name["products"].append(new_item_details)
-            return new_item_details, 201
+    for store in store_list:
+        if store["name"] == store_name:
+            store["products"] = request_data["products"]
+            return store["products"], 201
+    return {"message": "store does not exist"}, 404
+
+
+# delete all products for a store
+@app.put("/<string:store_name>/product")
+def update_product_only(store_name):
+    # request_data = request.get_json()
+    for store in store_list:
+        if store["name"] == store_name:
+            store["products"].clear()
+            return store, 201
+
+
+# delete all products for a store
+@app.delete("/<string:store_name>/product")
+def delete_products(store_name):
+    # request_data = request.get_json()
+    for store in store_list:
+        if store["name"] == store_name:
+            store["products"].clear()
+            return store, 201
     return {"message": "store does not exist"}, 404
