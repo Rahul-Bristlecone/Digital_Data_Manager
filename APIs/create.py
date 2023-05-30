@@ -105,6 +105,7 @@ def create_product():
         return {"message": "Store not available"}
 
 
+# update an existing store
 @create.put("/product/<string:product_id>")
 def update_product(product_id):
     request_data = request.get_json()
