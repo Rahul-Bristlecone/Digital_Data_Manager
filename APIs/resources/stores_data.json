@@ -1,0 +1,32 @@
+{
+    "store": [
+        {
+            "name": "Chroma",
+            "Department": [
+                {
+                    "name": "Beauty",
+                    "brand": [
+                        {
+                            "name": "MamaEarth",
+                            "range": [
+                                {
+                                    "name": "avocado",
+                                    "category": [
+                                        {
+                                            "name": "moisturiser",
+                                            "details":
+                                            {
+                                                "gender": "men",
+                                                "price": 43
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
