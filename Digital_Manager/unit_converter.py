@@ -9,7 +9,7 @@ class ConverterWindow(tk.Tk):
         super().__init__()
         self.title("UNIT CONVERTER")
         self.geometry("280x360")
-        self.iconbitmap("C:\\Users\\Rahul.Sharma4\\PycharmProjects\\pythonProject1\\Icons\\briefcase.ico")
+        self.iconbitmap("../Icons/briefcase.ico")
         self.resizable(False, False)
 
         self.converter_frames = dict()

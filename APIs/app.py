@@ -19,10 +19,11 @@
 
 from flask import Flask, request
 import json
-app = Flask(__name__)  # Creates a flask app for us
+
+app = Flask(__name__)  # Creates a flask app
 
 # list of stores (dictionary)
-with open("../Resources/app_stores.json", 'r') as store_data:
+with open("resources/app_stores.json", 'r') as store_data:
     store_list = []
     store = json.load(store_data)
     store_list.append(store)
@@ -93,7 +94,8 @@ def create_product(name):
     request_data = request.get_json()
     for store_name in store_list:
         if store_name["name"] == name:
-            new_item_details = {"range": request_data['range'], "details": request_data['details']}  # TODO add item with full details
+            new_item_details = {"range": request_data['range'],
+                                "details": request_data['details']}  # TODO add item with full details
             store_name["products"].append(new_item_details)
             return new_item_details, 201
     return {"message": "store does not exist"}, 404
