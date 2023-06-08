@@ -5,7 +5,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from APIs.resources.db import db
 from APIs.models import ItemModel
-from APIs.schemas import StoreSchema, UpdateStoreSchema, ItemSchema
+from APIs.schemas import StoreSchema, UpdateStoreSchema, ItemSchema, UpdateItemSchema
 
 # created a blueprint "stores" with description and Dunder method (__name__)
 # Dunder are usually used for operator overloading
@@ -27,21 +27,40 @@ class Item(MethodView):
             abort(404, message="item not found")
 
     def delete(self, item_id):
-        try:
-            item = ItemModel.query.get_or_404(item_id)
-            db.db.session.delete(item)
-            db.db.session.commit()
-            return {"message": "item deleted"}
-        except KeyError:
-            # return {"message": "store not found"}, 404
-            abort(404, message="item not found")
+        item = ItemModel.query.get_or_404(item_id)
+        db.session.delete(item)
+        db.session.commit()
+        return {"message": "Item deleted with item id " + item_id}
+        # try:
+        #     item = ItemModel.query.get_or_404(item_id)
+        #     db.db.session.delete(item)
+        #     db.db.session.commit()
+        #     return {"message": "item deleted"}
+        # except KeyError:
+        #     # return {"message": "store not found"}, 404
+        #     abort(404, message="item not found")
+
+    @blp.arguments(UpdateItemSchema)
+    @blp.response(200, ItemSchema)
+    def put(self, item_data, item_id):
+        item = ItemModel.query.get(item_id)
+        if item:
+            item.price = item_data["price"]
+            item.name = item_data["name"]
+        else:
+            item = ItemModel(product_id=item_id, **item_data)
+
+        db.session.add(item)
+        db.session.commit()
+
+        return item
 
 
 @blp.route("/item")
 class ItemList(MethodView):
     @blp.response(200, ItemSchema(many=True))
     def get(self):
-        return items.values()
+        return ItemModel.query.all()
         # store = StoreModel.query.get_or_404(store_id)
 
     # TODO if incoming data for a store has some blank values apart from the name of the store, not to be updated

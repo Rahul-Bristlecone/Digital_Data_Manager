@@ -19,7 +19,7 @@ blp = Blueprint("stores", __name__, description="Operations on stores")
 class Store(MethodView):
     @blp.response(200, StoreSchema)
     def get(self, store_id):
-        store = StoreModel.get_or_404(store_id)
+        store = StoreModel.query.get_or_404(store_id)
         return store
 
     # except KeyError:
@@ -27,34 +27,39 @@ class Store(MethodView):
     #     abort(404, message="store not found")
 
     def delete(self, store_id):
-        try:
-            store = StoreModel.query.get_or_404(store_id)
-            db.db.session.delete(store)
-            db.db.session.commit()
-            return {"message": "store deleted"}
-        except KeyError:
-            # return {"message": "store not found"}, 404
-            abort(404, message="store not found")
+        store = StoreModel.query.get_or_404(store_id)
+        db.session.delete(store)
+        db.session.commit()
+        return {"message": "store deleted with store id " + store_id}
+        # raise NotImplementedError("Not implemented delete store")
+        # try:
+        #     store = StoreModel.query.get_or_404(store_id)
+        #     db.db.session.delete(store)
+        #     db.db.session.commit()
+        #     return {"message": "store deleted"}
+        # except KeyError:
+        #     # return {"message": "store not found"}, 404
+        #     abort(404, message="store not found")
+
+    # TODO if incoming data for a store has some blank values apart from the name of the store, not to be updated
+    @blp.arguments(UpdateStoreSchema)  # Validation of request data (i.e. store_data) for updating a store
+    @blp.response(200, StoreSchema)
+    def put(self, store_id, store_data):
+        store = StoreModel.query.get_or_404(store_id)
+        if store:
+            store.name = store_data["name"]
+        else:
+            store = StoreModel(store_id=store_id, **store_data)
+
+        return store
 
 
 @blp.route("/store")
 class StoreList(MethodView):
     @blp.response(200, StoreSchema(many=True))
     def get(self):
-        return stores.values()
+        return StoreModel.query.all()
         # store = StoreModel.query.get_or_404(store_id)
-
-    # TODO if incoming data for a store has some blank values apart from the name of the store, not to be updated
-    @blp.arguments(UpdateStoreSchema)  # Validation of request data (i.e. store_data) for updating a store
-    def put(self, store_data, store_id):
-        # request_data = request.get_json()
-        try:
-            store = StoreModel.query.get_or_404(store_id)
-            store |= store_data
-            db.db.session.commit()
-            return store
-        except KeyError:
-            abort(400, message="Store not available")
 
     @blp.arguments(StoreSchema)  # Validation of request data for creating a store (Marshmallow)
     @blp.response(201, StoreSchema)  # Decorating the response
@@ -65,7 +70,7 @@ class StoreList(MethodView):
             db.session.add(store)
             db.session.commit()
         except IntegrityError:
-            abort(400, message = "Store already exists")
+            abort(400, message="Store already exists")
         except SQLAlchemyError:
             abort(500, message="Store not available while creating")
 
