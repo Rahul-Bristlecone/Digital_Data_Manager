@@ -10,6 +10,7 @@ import APIs.models  # SQLAlchemy knows tables to be created through Models
 
 from APIs.resources.store import blp as StoreBp
 from APIs.resources.product import blp as ItemBp
+from APIs.resources.tags import blp as TagsBp
 
 
 # This is called factory pattern
@@ -27,7 +28,7 @@ def create_app(db_url=None):
     develop_store.config["OPENAPI_URL_PREFIX"] = "/"
     develop_store.config["OPENAPI_SWAGGER_UI_PATH"] = "/swagger-ui"
     develop_store.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
-    develop_store.config["SQLALCHEMY_DATABASE_URI"] = db_url or os.getenv("DATABASE_URL", "sqlite:///data.db")
+    develop_store.config["SQLALCHEMY_DATABASE_URI"] = db_url or os.getenv("DATABASE_URL", "sqlite:///store_data.db")
     db.init_app(develop_store)  # db is SQLAlchemy extension
 
     api = Api(develop_store)
@@ -42,5 +43,6 @@ def create_app(db_url=None):
 
     api.register_blueprint(StoreBp)
     api.register_blueprint(ItemBp)
+    api.register_blueprint(TagsBp)
 
     return develop_store
