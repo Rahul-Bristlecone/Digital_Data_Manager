@@ -7,6 +7,6 @@ class StoreModel(db.Model):  # Mapping the class to the rows of the table
     store_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(40), unique=True, nullable=False)
     #  cascade is used if store is parent is deleted then children are automatically deleted.
-    items = db.relationship("ItemModel", lazy="dynamic", cascade="all, delete")
-    tags = db.relationship("TagsModel", lazy="dynamic")
+    items = db.relationship("ItemModel", back_populates="stores", cascade="all, delete")
+    tags = db.relationship("TagsModel", back_populates="stores")
 

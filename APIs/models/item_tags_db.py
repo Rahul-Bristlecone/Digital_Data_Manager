@@ -1,9 +1,13 @@
 from APIs.resources.db import db
 
 
-class ItemTagsModel(db.Model):
-    __tablename__ = "ItemTagsModel"
+# ItemTags table is a secondary table created from tags table and Items table.
+# relationship - we have tags for a store and those tags will now be associated with items.
+# one item can have multiple tags (moisturiser and gender) and that tag can be associated with --
+# -- multiple items, all these tags and items are part of a store
+class ItemTagsModel(db.Model):  # Mapping the class to the rows of the table
+    __tablename__ = "ItemTags"
 
-    item_tag_id = db.Column(db.Integer, primary_key=True)
-    item_id = db.column(db.Integer, db.ForeignKey("item_db.item_id"))
-    tag_id = db.column(db.Integer, db.ForeignKey("tags_db.tag_id"))
+    id = db.Column(db.Integer, primary_key=True)
+    itemid = db.Column(db.Integer, db.ForeignKey("items.product_id"))
+    tagid = db.Column(db.Integer, db.ForeignKey("tags.tag_id"))
