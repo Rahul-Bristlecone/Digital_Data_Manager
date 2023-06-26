@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM python:3.11
 EXPOSE 5000
 # This is the docker image file we are creating and we are putting app.py (application/API) into it
 WORKDIR /develop_store
