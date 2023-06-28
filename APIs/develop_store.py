@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_smorest import Api
-import os
+import os, secrets
+
+from flask_jwt_extended import JWTManager
 
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.testing.config import db_url
@@ -32,6 +34,9 @@ def create_app(db_url=None):
     db.init_app(develop_store)  # db is SQLAlchemy extension
 
     api = Api(develop_store)
+    # assign a secret key to JWT
+    develop_store.config["JWT_SECRET_KEY"] = secrets.SystemRandom.getrandbits(128)
+    jwt = JWTManager(develop_store)
 
     @develop_store.before_request
     def create_tables():
