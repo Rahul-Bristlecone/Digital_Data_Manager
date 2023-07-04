@@ -20,7 +20,7 @@ class PlainStoreSchema(Schema):
 
 class PlainTagsSchema(Schema):
     tag_id = fields.Int(dump_only=True)
-    name = fields.Str()
+    name = fields.Str(required=True)
 
 
 class UpdateStoreSchema(Schema):
@@ -59,3 +59,9 @@ class TagAndItemSchema(Schema):
     message = fields.Str()
     item = fields.Nested(ItemSchema)
     tag = fields.Nested(TagsSchema)
+
+
+class UserSchema(Schema):
+    user_id = fields.Int(dump_only=True)  # excluded while serializing
+    username = fields.Str(required=True)
+    password = fields.Str(required=True, load_only=True)  # excluded while deserializing
