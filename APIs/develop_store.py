@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_smorest import Api
-import os, secrets
+import os
 
 from flask_jwt_extended import JWTManager
 

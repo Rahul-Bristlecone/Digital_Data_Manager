@@ -1,6 +1,6 @@
 from flask_smorest import Blueprint, abort
 from flask.views import MethodView
-# from passlib import pbkdf2_sha256
+from passlib.hash import pbkdf2_sha256
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 
 from APIs.resources.db import db
@@ -10,15 +10,17 @@ from APIs.schemas import UserSchema
 blp = Blueprint("Users", __name__, description="operations on user")
 
 
+@blp.route("/register")
 class UserRegister(MethodView):
+    @blp.arguments(UserSchema)
     def post(self, user_data):
         if UserModel.query.filter(UserModel.username == user_data["username"]).first():
             abort(409, message="already exist")
 
-            user = UserModel(usename=user_data["username"],
-                             password=user_data["password"])
+        user = UserModel(username=user_data["username"],
+                         password=pbkdf2_sha256.hash(user_data["password"]),)
 
-            db.session.add(user)
-            db.session.commit(user)
+        db.session.add(user)
+        db.session.commit()
 
-            return {"message":"All good"}
+        return {"message": "All good"}, 201

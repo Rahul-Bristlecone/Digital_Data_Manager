@@ -14,7 +14,7 @@ blp = Blueprint("tags", __name__, description="Operations on tags")
 
 
 # Tags related to a store (create and retrieve)
-@blp.route("/store/<string:store_id>/tag")
+@blp.route("/store/<int:store_id>/tag")
 class TagsInStore(MethodView):
     # get the list of tags registered under a store
     @blp.response(200, TagsSchema(many=True))
@@ -41,7 +41,7 @@ class TagsInStore(MethodView):
         return tag
 
 
-@blp.route("/tag/<string:tag_id>")
+@blp.route("/tag/<int:tag_id>")
 class Tag(MethodView):
     @blp.response(200, TagsSchema)
     def get(self, tag_id):
@@ -59,7 +59,7 @@ class Tag(MethodView):
 
 
 # class for linking/unlinking tag with item
-@blp.route("/item/<String:item_id>/tag/<String:tag_id>")
+@blp.route("/item/<int:item_id>/tag/<int:tag_id>")
 class ItemTagsLink(MethodView):
     # To link tag and item, add a row in the ItemTags table
     @blp.response(201, TagsSchema)
