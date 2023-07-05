@@ -2,6 +2,7 @@ import uuid
 from flask_smorest import Blueprint, abort
 from flask.views import MethodView
 from sqlalchemy.exc import SQLAlchemyError
+from flask_jwt_extended import jwt_required
 
 from APIs.resources.db import db
 from APIs.models import ItemModel
@@ -75,6 +76,8 @@ class ItemList(MethodView):
     #     except KeyError:
     #         abort(400, message="Store not available")
 
+    @jwt_required()
+    # JWT token is required for end-points which can't be access unless user is logged-in
     @blp.arguments(ItemSchema)  # Validation of request data for creating a store (Marshmallow)
     @blp.response(201, ItemSchema)  # Decorating the response
     def post(self, item_data):
