@@ -8,6 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.testing.config import db_url
 
 from APIs.resources.db import db
+from blocklist import BLOCKLIST
 import APIs.models  # SQLAlchemy knows tables to be created through Models
 
 from APIs.resources.store import blp as StoreBp
@@ -39,6 +40,10 @@ def create_app(db_url=None):
     # configuring this application to use JWTs for authentication
     develop_store.config["JWT_SECRET_KEY"] = "hello"
     jwt = JWTManager(develop_store)
+
+    @jwt.token_in_blocklist_loader
+    def verify_token_exist(jwt_header, jwt_payload):
+        return jwt_payload["jti"] in BLOCKLIST
 
     @jwt.expired_token_loader
     def missing_token(error):
