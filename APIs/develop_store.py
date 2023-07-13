@@ -30,6 +30,7 @@ def create_app(db_url=None):
     develop_store.config["API_VERSION"] = "v1"
     develop_store.config["OPENAPI_VERSION"] = "3.0.3"
     develop_store.config["OPENAPI_URL_PREFIX"] = "/"
+    develop_store.config['TESTING'] = True
     develop_store.config["OPENAPI_SWAGGER_UI_PATH"] = "/swagger-ui"
     develop_store.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
     develop_store.config["SQLALCHEMY_DATABASE_URI"] = db_url or os.getenv("DATABASE_URL", "sqlite:///store_data.db")

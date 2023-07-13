@@ -90,6 +90,9 @@ class ItemList(MethodView):
         except SQLAlchemyError:
             abort(500, message="Store not available while inserting item")
 
+        # response = {"data": item,
+        #             "status": 'Y'}
+
         return item
 
         # store_id = uuid.uuid4().hex  # unique universal id is being generated
