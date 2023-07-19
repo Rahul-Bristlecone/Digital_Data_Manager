@@ -48,7 +48,7 @@ def send_email():
         passw = 'MTGrHWd3m61hZYFV'
         sender = 'rsshrma.92@gmail.com'
         new_user = email.get()
-        send_email.send_email_otp(passw, sender, new_user)
+        send_email_sms.send_email_otp(passw, sender, new_user)
 
         message = ttk.Label(dashboard, font=("Aharoni", 10, "bold"), text="Email sent, Check your inbox")
         message.pack(pady=20)
