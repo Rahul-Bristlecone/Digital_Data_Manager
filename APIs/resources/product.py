@@ -2,6 +2,7 @@ import uuid
 from flask_smorest import Blueprint, abort
 from flask.views import MethodView
 from sqlalchemy.exc import SQLAlchemyError
+from flask_jwt_extended import jwt_required
 
 from APIs.resources.db import db
 from APIs.models import ItemModel
@@ -15,7 +16,7 @@ blp = Blueprint("Items", __name__, description="Operations on Items")
 # create a class from MethodView whose methods will route to specific end-points because the blue-print is--
 # --prepared for that particular class
 # This blueprint method will route all the methods of this class to this particular end-point
-@blp.route("/item/<string:item_id>")
+@blp.route("/item/<int:item_id>")
 class Item(MethodView):
     @blp.response(200, ItemSchema)
     def get(self, item_id):
@@ -75,6 +76,8 @@ class ItemList(MethodView):
     #     except KeyError:
     #         abort(400, message="Store not available")
 
+    @jwt_required()
+    # JWT token is required for end-points which can't be access unless user is logged-in
     @blp.arguments(ItemSchema)  # Validation of request data for creating a store (Marshmallow)
     @blp.response(201, ItemSchema)  # Decorating the response
     def post(self, item_data):
@@ -86,6 +89,9 @@ class ItemList(MethodView):
             db.session.commit()
         except SQLAlchemyError:
             abort(500, message="Store not available while inserting item")
+
+        # response = {"data": item,
+        #             "status": 'Y'}
 
         return item
 

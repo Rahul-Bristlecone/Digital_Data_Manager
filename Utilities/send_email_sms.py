@@ -15,7 +15,7 @@ def otp_extraction():
 
 def send_email_otp(password, sender, receiver):
     try:
-        server = smtplib.SMTP('smtp-relay.sendinblue.com', 587)
+        server = smtplib.SMTP('smtp-relay.brevo.com', 587)
         server.starttls()
         server.login(sender, password)
         server.sendmail(sender, receiver, message)
