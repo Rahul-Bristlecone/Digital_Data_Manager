@@ -3,7 +3,7 @@
 # Create logs
 import tkinter as tk
 from tkinter import ttk
-from Utilities import send_email_sms
+from Utilities import send_email_sms, sql_creds
 import json
 import MySQLdb
 
@@ -26,10 +26,11 @@ dashboard_image = ImageTk.PhotoImage(Image.open('../Icons/dashboard_image.png').
 new_user_image = ImageTk.PhotoImage(Image.open('../Icons/add-user.png').resize((23, 23)))
 exist_user_image = ImageTk.PhotoImage(Image.open('../Icons/existing-user.png').resize((25, 25)))
 
-db = MySQLdb.connect('localhost', 'rsshrma92', 'rsshrma92', 'document_manager')
 
-print("Connection successful")
-cursor = db.cursor()
+# db = MySQLdb.connect('localhost', 'rsshrma92', 'rsshrma92', 'document_manager')
+#
+# print("Connection successful")
+# cursor = db.cursor()
 
 
 def reset():
@@ -45,8 +46,8 @@ def reset():
 
 def send_email():
     if len(email.get()) > 4 and '@' in email.get() and '.' in email.get():
-        passw = 'MTGrHWd3m61hZYFV'
-        sender = 'rsshrma.92@gmail.com'
+        passw = Sql_creds.passw
+        sender = Sql_creds.sender
         new_user = email.get()
         send_email_sms.send_email_otp(passw, sender, new_user)
 
@@ -95,9 +96,9 @@ def submit_details():
                     "mobile": new_phone_entry.get(), }
             json_data = json.dumps(data)
             print(json_data)
-            cursor.execute('INSERT INTO new_user VALUES (%s,%s,%s,%s,%s)',
-                           (name.get(), new_username.get(), email.get(), new_password.get(), phone.get()))
-            db.commit()
+            Sql_creds.cursor.execute('INSERT INTO new_user VALUES (%s,%s,%s,%s,%s)',
+                                     (name.get(), new_username.get(), email.get(), new_password.get(), phone.get()))
+            Sql_creds.db.commit()
             reset()
 
 
