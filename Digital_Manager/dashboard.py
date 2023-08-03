@@ -5,7 +5,6 @@ import tkinter as tk
 from tkinter import ttk
 from Utilities import send_email_sms, sql_creds
 import json
-import MySQLdb
 
 from PIL import ImageTk, Image
 
