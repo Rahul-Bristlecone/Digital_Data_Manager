@@ -46,8 +46,8 @@ def reset():
 
 def send_email():
     if len(email.get()) > 4 and '@' in email.get() and '.' in email.get():
-        passw = Sql_creds.passw
-        sender = Sql_creds.sender
+        passw = sql_creds.passw
+        sender = sql_creds.sender
         new_user = email.get()
         send_email_sms.send_email_otp(passw, sender, new_user)
 
@@ -96,9 +96,9 @@ def submit_details():
                     "mobile": new_phone_entry.get(), }
             json_data = json.dumps(data)
             print(json_data)
-            Sql_creds.cursor.execute('INSERT INTO new_user VALUES (%s,%s,%s,%s,%s)',
+            sql_creds.cursor.execute('INSERT INTO new_user VALUES (%s,%s,%s,%s,%s)',
                                      (name.get(), new_username.get(), email.get(), new_password.get(), phone.get()))
-            Sql_creds.db.commit()
+            sql_creds.db.commit()
             reset()
 
 
