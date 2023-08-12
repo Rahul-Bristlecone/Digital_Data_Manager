@@ -2,7 +2,7 @@ import pytest
 from flask import Flask
 from APIs.resources.db import db
 from APIs.develop_store import create_app
-from APIs.models import ItemModel
+# from APIs.models import ItemModel
 
 
 @pytest.fixture
@@ -24,16 +24,17 @@ def client(app):
 # a test client for making requests to the application. We then define a test function test_post
 # that uses the client fixture to make a POST request to the /item endpoint with some test data.
 # We check the response status code and data to make sure they are correct, and
-# we also check that the item was added to the database.
+# we also check that the item was added to the database
+
 def test_post(client):
     # Test data
     item_data = {
-        "name": "test_item01",
+        "name": "test_item05",
         "price": 10,
         "store_id": 1
     }
 
-    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4OTI2OTU2NCwianRpIjoiYzg4YzI3MTYtNzY5Ny00ZDAzLWEyZWUtNzZmNmQyZTZkYzA4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MiwibmJmIjoxNjg5MjY5NTY0LCJleHAiOjE2ODkyNzA0NjR9.wFqavMkSYCBXy0REs66diGhDoCeyoyK0804mlziZGl4"
+    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5MTA0MTk0OSwianRpIjoiYjIxZDFiYzEtOGY5Yy00OGExLWJlNDUtZjAyYzlkYzc1YWFlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MywibmJmIjoxNjkxMDQxOTQ5LCJleHAiOjE2OTEwNDI4NDl9.EPHoyQsLoA5PG8ezd35o0VN9PS8jBIiyAEXky2enk7c"
 
     # Make a POST request to the endpoint with the test data
     response = client.post("/item", json=item_data, headers={"Authorization": f"Bearer {token}"})
@@ -41,8 +42,8 @@ def test_post(client):
     # Check the response status code and data
     assert response.status_code == 201
     assert response.get_json() == {
-        "product_id": 19,
-        "name": "test_item01",
+        "product_id": 23,
+        "name": "test_item05",
         "price": 10,
         "tags": []
     }
