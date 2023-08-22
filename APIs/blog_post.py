@@ -5,9 +5,13 @@ class BlogPost:
         self.title = title
         self.content = content
 
-    # Accepting the title and content, converting it into a dictionary to send it for creating a post.
+    # def blog_post(self, title, content):
+    #     self.title = title
+    #     self.content = content
+
+    # Accepting the title and content, converting it into a dictionary to send it for creating a blog_post.
     def json(self):
         return {
-                "Title": self.title,
-                "Content": self.content,
+                "title": self.title,
+                "content": self.content,
                 }

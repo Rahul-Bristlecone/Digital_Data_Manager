@@ -13,7 +13,9 @@ class TestBlogPost(TestCase):
 
     def test_json(self):
         blog_post_obj = BlogPost("Espn cric info", "Rising Stars")
-        expected_result = {"Title": "Espn cric info", "Content": "Rising Stars", }
+        expected_result = {"Title": "Espn cric info", "Content": "Rising Stars" , }
         # checking that the values returned by the function in the form of dictionary are
         # same as provided or not (json type and values)
         self.assertDictEqual(expected_result, blog_post_obj.json())
+
+
