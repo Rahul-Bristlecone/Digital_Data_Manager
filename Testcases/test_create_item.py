@@ -20,7 +20,7 @@ def client(app):
     return app.test_client()
 
 
-# In this example, we define two pytest fixtures app and client that set up a test Flask application and
+# In this example, we defined two pytest fixtures app and client, that set up a test Flask application and
 # a test client for making requests to the application. We then define a test function test_post
 # that uses the client fixture to make a POST request to the /item endpoint with some test data.
 # We check the response status code and data to make sure they are correct, and
