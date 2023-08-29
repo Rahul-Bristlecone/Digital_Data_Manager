@@ -1,4 +1,5 @@
 dict_blogs = {}  # blog name : blog object
+MENU_PROMPT = "Enter your choice, c-create, l-list, d-delete, e-exit"
 
 
 def menu():
@@ -6,7 +7,11 @@ def menu():
     # Pick a choice from the menu
     # Do something with that choice
     # Exit
-    pass
+    print_blogs()
+    choice = input(MENU_PROMPT)
+    # print(choice)
+    # match choice:
+    #     case 'c': print()
 
 
 def print_blogs():
