@@ -15,7 +15,7 @@ def menu():
     # print(choice)
     match choice:
         case 'c':
-            ask_create_blog()
+            create_blog()
         case 'r':
             read_blog()
         case 'd':
@@ -30,7 +30,7 @@ def print_blogs():
         print("- {}".format(b_object))
 
 
-def ask_create_blog():
+def create_blog():
     blog_title = input("Enter title of your blog")
     blog_author = input("Enter author name")
     blogs[blog_title] = Blog(blog_title, blog_author)
@@ -39,6 +39,13 @@ def ask_create_blog():
 def read_blog():
     blog_title = input("Enter title of the blog to be read")
     print_posts(blogs[blog_title])
+
+
+def create_post():
+    blog_name = input("Enter blog name to create post")
+    post_title = input("Enter your post title")
+    post_content = input("Enter content of your post")
+    blogs[blog_name].Blog.create_post(post_title, post_content)
 
 
 def print_posts(blog):
@@ -52,3 +59,6 @@ def print_post(post):
 
 def delete_post():
     pass
+
+
+menu()
