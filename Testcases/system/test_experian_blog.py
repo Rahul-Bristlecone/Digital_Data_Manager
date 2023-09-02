@@ -31,7 +31,7 @@ class TestExperianBlog(TestCase):
         # because we don't know what will be the return value
         with patch('builtins.input') as mocked_input:
             mocked_input.side_effect = ("OMG 2", "Akshay")
-            experian_blog.ask_create_blog()
+            experian_blog.create_blog()
             self.assertIsNotNone(experian_blog.blogs.get("OMG 2"))
 
     def test_read_blog(self):
