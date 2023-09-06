@@ -7,11 +7,23 @@ from APIs.blog_post import BlogPost
 
 
 class TestExperianBlog(TestCase):
+    def SetUp(self):
+        blog_obj = Blog("Test", "Author")
+        experian_blog.blogs = {'Test': blog_obj}
 
     def test_menu_choice_prompt(self):
-        with patch('builtins.input') as mocked_input:  # patching input method
+        with patch('builtins.input', return_value='q') as mocked_input:  # patching input method
             experian_blog.menu()
             mocked_input.assert_called_with(experian_blog.MENU_PROMPT)
+
+    def test_menu_create_blog(self):
+        with patch('builtins.input') as mocked_input:  # patching input method
+            with patch('experian_blog.create_blog') as mocked_create_blog:
+                # mocked_input.side_effect('c', 'Scam', 'Rahul', 'e')
+                mocked_input.side_effect('c', 'e')
+                experian_blog.menu()
+                mocked_create_blog.assert_called()
+                # self.assertIsNotNone(experian_blog.blogs["scam"])
 
     def test_menu_calls_print_blogs(self):
         with patch('APIs.experian_blog.print_blogs') as mocked_print_blogs:  # patching function call
@@ -31,7 +43,7 @@ class TestExperianBlog(TestCase):
         # because we don't know what will be the return value
         with patch('builtins.input') as mocked_input:
             mocked_input.side_effect = ("OMG 2", "Akshay")
-            experian_blog.ask_create_blog()
+            experian_blog.create_blog()
             self.assertIsNotNone(experian_blog.blogs.get("OMG 2"))
 
     def test_read_blog(self):
@@ -42,6 +54,15 @@ class TestExperianBlog(TestCase):
             with patch('APIs.experian_blog.print_posts') as mocked_print_posts:
                 experian_blog.read_blog()
                 mocked_print_posts.assert_called_with(blog_obj)
+
+    def test_create_post(self):
+        blog_obj = Blog("Scam_series", "Rahul")
+        experian_blog.blogs = {"Scam_Series": blog_obj}
+        with patch('builtins.input') as mocked_input:
+            mocked_input.side_effect = ("Scam series", "Scam 2003", "The telgi story")
+            experian_blog.create_post()
+            self.assertEqual(blog_obj.posts[0].title, "Scam 2003")
+            self.assertEqual(blog_obj.posts[0].content, "The telgi story")
 
     def test_print_posts(self):
         blog_obj = Blog("Test", "Author")
