@@ -11,6 +11,7 @@ class BlogPost:
 
     # Accepting the title and content, converting it into a dictionary to send it for creating a blog_post.
     def json(self):
+        # returning a dictionary
         return {
                 "title": self.title,
                 "content": self.content,

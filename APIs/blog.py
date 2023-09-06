@@ -6,7 +6,7 @@ class Blog:
     def __init__(self, title, author):
         self.title = title
         self.author = author
-        self.posts = []
+        self.posts = []  # list of dictionary
 
     # representation of class object
     def __repr__(self):
@@ -15,10 +15,14 @@ class Blog:
                                              len(self.posts),
                                              "s" if len(self.posts) != 1 else "")
 
-    # This is the second unit (imported another module) - we have already created a test for this test_blog_post
+    # This is the second unit (imported from another module)
+    # targeting to create a post which requires title and content
+    # - we have already created a test for this test_blog_post
     # Integration test will be written for this
     def create_post(self, title, content):
         self.posts.append(BlogPost(title, content))
+        print(self.posts[0].title)
+        print(self.posts[0].content)
 
     def json(self):
         return {
@@ -26,3 +30,7 @@ class Blog:
             "author": self.author,
             "posts": [post.json() for post in self.posts]
         }
+
+
+green = Blog("hulk", "huj")
+green.create_post("mouyh", "huj")
