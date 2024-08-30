@@ -1,5 +1,4 @@
 import pytest
-from flask import Flask
 from APIs.resources.db import db
 from APIs.develop_store import create_app
 # from APIs.models import ItemModel

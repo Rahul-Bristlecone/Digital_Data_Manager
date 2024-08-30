@@ -31,4 +31,4 @@ Docker image is used for containerization
 pytest is used for unit tests and also postman for manual testing
 
 # packaging
-For packaging the dependencies requirements.txt is used. pipenv to be used later
+For packaging the dependencies requirements.txt is used. pipenv to be used later.
