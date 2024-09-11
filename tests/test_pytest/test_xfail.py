@@ -15,7 +15,6 @@ def test_os_verify():
     assert letters + numbers == "abcd1234"
 
 
-
 # fixtures are like before test & after test tests
 # like test browsers, db connections - use cases
 # fixture is actually passed as argument in a test function - one way to call the fixture
@@ -25,6 +24,7 @@ def store_data():
     print("***** Testing fixtures *****")
     data = ["store_id", "store_name", "tags", "products included"]
     return data
+
 
 def test_create_store(store_data):
     assert store_data[0:2] == ["store_id", "store_name"]
@@ -36,7 +36,7 @@ def reverse_list(lst):
 
 
 def test_reverse_list(store_data):
-    assert store_data[::-1] == reverse_list(store_data) # return value is a list from store_data
+    assert store_data[::-1] == reverse_list(store_data)  # return value is a list from store_data
 
 
 # return value from fixture cannot be used in this case
@@ -44,4 +44,3 @@ def test_reverse_list(store_data):
 def test_fixture_demo():
     assert 1 == 1
     assert store_data() == ["store_id", "store_name", "tags", "products included"]
-

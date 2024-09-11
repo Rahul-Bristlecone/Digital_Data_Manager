@@ -1,7 +1,9 @@
 import pytest
 
+
 def pytest_configure():
     pytest.lst1 = [12, 13, 12, 98, 1, 26]
+
 
 @pytest.fixture()
 def append_list():
