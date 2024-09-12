@@ -3,6 +3,7 @@ import os
 
 import pytest
 
+
 # task: write a fixture to test if a list has been appended
 
 
@@ -14,7 +15,6 @@ def test_append_list(append_list):
 def test_len_check(append_list):
     append_list.pop()
     assert len(append_list) == len(pytest.lst1)
-
 
 
 # Tear Down example on file operations
@@ -35,7 +35,5 @@ def file_data():
 def test_file_operation(file_data):
     assert (file_data.readline()) == "This is good and practical"
 
-
 # Sharing fixtures - kind of a plugin using conftest.py - it needs not be imported,
 # should be available to other tests by default
-
