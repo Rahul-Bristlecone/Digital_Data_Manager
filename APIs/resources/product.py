@@ -16,7 +16,7 @@ blp = Blueprint("Items", __name__, description="Operations on Items")
 # create a class from MethodView whose methods will route to specific end-points because the blue-print is--
 # --prepared for that particular class
 # This blueprint method will route all the methods of this class to this particular end-point
-@blp.route("/item/<int:item_id>")
+@blp.route("/item/<string:item_id>")
 class Item(MethodView):
     @blp.response(200, ItemSchema)
     def get(self, item_id):

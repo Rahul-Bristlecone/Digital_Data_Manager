@@ -14,14 +14,14 @@ blp = Blueprint("tags", __name__, description="Operations on tags")
 
 
 # Tags related to a store (create and retrieve)
-@blp.route("/store/<int:store_id>/tag")
+@blp.route("/store/<string:store_id>/tag")
 class TagsInStore(MethodView):
     # get the list of tags registered under a store
     @blp.response(200, TagsSchema(many=True))
     def get(self, store_id):
         if store_id:
             store = StoreModel.query.get_or_404(store_id)
-            return store.tags()
+            return store.tags
         # store = StoreModel.query.get_or_404(store_id)  # to check if store_id exists
         # return store.query.all()
 

@@ -12,10 +12,10 @@ from APIs.schemas import StoreSchema, UpdateStoreSchema
 blp = Blueprint("stores", __name__, description="Operations on stores")
 
 
-# create a class from MethodView whose methods will route to specific end-points because the blue-print is--
+# Inherit a class from MethodView whose methods will route to specific end-points because the blue-print is--
 # --prepared for that particular class
 # This blueprint method will route all the methods of this class to this particular end-point
-@blp.route("/store/<int:store_id>")
+@blp.route("/store/<string:store_id>")
 class Store(MethodView):
     @blp.response(200, StoreSchema)
     def get(self, store_id):
@@ -26,11 +26,12 @@ class Store(MethodView):
     #     # return {"message": "store not found"}, 404
     #     abort(404, message="store not found")
 
+    @blp.response(200, StoreSchema)
     def delete(self, store_id):
         store = StoreModel.query.get_or_404(store_id)
         db.session.delete(store)
         db.session.commit()
-        return {"message": "store deleted with store id " + store_id}
+        return {"message":f"store deleted with store id  {store_id}"}
         # raise NotImplementedError("Not implemented delete store")
         # try:
         #     store = StoreModel.query.get_or_404(store_id)
