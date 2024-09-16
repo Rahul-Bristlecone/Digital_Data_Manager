@@ -1,0 +1,10 @@
+Data driven testing: This folder along with utils is part of Automation
+framework. May include fixture (conftest.py), marker (.ini file)
+
+Explanation:
+This folder (data.csv) will include our input data files
+in csv format. There can be multiple data files depend upon
+requirement as per the tests.
+
+Testing process flow:
+Fetch the data from data.csv and use that data in the test cases.
