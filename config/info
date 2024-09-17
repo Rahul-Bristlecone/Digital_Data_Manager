@@ -8,3 +8,5 @@ requirement as per the tests.
 
 Testing process flow:
 Fetch the data from data.csv and use that data in the test cases.
+Alternatively, and importantly Object oriented approach is used
+to do the Data driven testing
