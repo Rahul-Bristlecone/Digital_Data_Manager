@@ -2,9 +2,8 @@ import configparser
 from pathlib import Path
 
 
-# Object-oriented way of parsing the data from the confiq file
-
-class ConfigParser():
+# Object-oriented way of parsing the data from the config file
+class ConnectionDataParser():
     file_name = "hostname.ini"
     directory_name = "config"
     config = configparser.ConfigParser()
@@ -23,6 +22,6 @@ class ConfigParser():
 
 
 if __name__ == '__main__':
-    conf = ConfigParser() # by default, it will pick hostname.ini
+    conf = ConnectionDataParser()  # by default, it will pick hostname.ini
     print(conf.get_port_data())
     print(conf.get_hostname_data())

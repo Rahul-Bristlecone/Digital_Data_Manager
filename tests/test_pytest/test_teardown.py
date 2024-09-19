@@ -18,7 +18,8 @@ def test_len_check(append_list):
 
 
 # Tear Down example on file operations
-# Open a file from the fixture, do your operations, assert the operation has been done.
+# Open a file from the fixture, do your operations
+# (in test function) assert the operation has been done.
 # close the file and delete when test is done
 # code after the clean-up code or tear down
 @pytest.fixture()
@@ -35,5 +36,5 @@ def file_data():
 def test_file_operation(file_data):
     assert (file_data.readline()) == "This is good and practical"
 
-# Sharing fixtures - kind of a plugin using conftest.py - it needs not be imported,
+# Sharing fixtures - kind of plugin using conftest.py - it needs not be imported,
 # should be available to other tests by default
