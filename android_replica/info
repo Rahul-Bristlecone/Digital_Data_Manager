@@ -1,0 +1,5 @@
+BDD scenario for Back-end only
+- Gherkin language to be used to write scenario in .feature file
+- Given, When & Then - step is glued to step definition
+- 1 feature file for one feature
+- multiple scenarios in 1 feature file
