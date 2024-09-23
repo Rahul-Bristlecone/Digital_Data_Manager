@@ -15,7 +15,8 @@ class ConnectionDataParser():
         self.config.read(self.file_path)
 
     def get_hostname_data(self):
-        return self.config['ABS_warehouse_hostname']['hostname']
+        test = {'new': self.config['ABS_warehouse_hostname']['hostname']}
+        return test['new']
 
     def get_port_data(self):
         return self.config['ABS_warehouse_hostname']['port']

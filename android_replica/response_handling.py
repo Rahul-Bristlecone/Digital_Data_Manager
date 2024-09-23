@@ -28,11 +28,11 @@ class ProductTable():
 
     def setup_connection(self):
         response = requests.get(self.url, headers=self.headers)
-        response_data = StringIO(response.text)
+        response_data = StringIO(response.text)  # the data is in string format, need to convert it in file format TSV
         reader = pd.read_csv(response_data, sep='\t')
 
         if reader['6'].duplicated().any():
-            print("could not save due to duplicated data")
+            print("could not save due to duplicated data")  # data available is not nice
 
         else:
             reader.to_csv("/new.dat", sep="\t", index=False)
