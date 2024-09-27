@@ -1,4 +1,4 @@
-from utils.hostname_reader import *
+from utils.db_connect import *
 
 
 # convert this function into a set-up function
