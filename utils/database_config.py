@@ -1,3 +1,4 @@
+# *** flipkart shipping ***
 #  this is a utility to fetch and configure database from the config file (.ini)
 #  __init__ will fetch the config file (.ini) and
 #  db_config will configure the database with the values provided in config (.ini) file
@@ -6,7 +7,15 @@ from pathlib import Path
 import configparser
 
 
-class DatabaseConfiguration():
+class DatabaseConfiguration:
+    """
+    class responsible for managing DB configuration for further use
+
+    Method
+    ------
+    db_config
+
+    """
     config_file = "hostname.ini"
     config_directory = "config"
     config = configparser.ConfigParser()
