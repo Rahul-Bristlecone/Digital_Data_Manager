@@ -1,4 +1,4 @@
-# Warehouse
+# Warehouse  #generic
 import configparser
 from pathlib import Path
 
