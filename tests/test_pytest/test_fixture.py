@@ -12,13 +12,13 @@ def test_data_type_collection_fixture(data_type_collection):
     assert type(data_type_collection("string")) == list
 
 
-#parameterization using fixtures
+# parameterization using fixtures
 def test_param(data_for_fixture, access_data):
     if access_data == "access":
         assert type(data_for_fixture) in [tuple, list]
     elif access_data == "split":
         assert len(data_for_fixture) == 2 or 3
     elif access_data == "assign":
-        data_for_fixture[0] = 9
+        data_for_fixture[1] = 9
         assert True
 
