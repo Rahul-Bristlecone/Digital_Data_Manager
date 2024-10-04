@@ -1,5 +1,3 @@
-import pytest
-import configparser
 from utils.config_file_parser import ConnectionDataParser
 
 # this is following the OOPs model which is a good practice
