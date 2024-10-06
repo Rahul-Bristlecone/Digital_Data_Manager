@@ -19,7 +19,7 @@ class ProductTable:
 
     def __init__(self, url_header):
         initializer = ProductTableInitializer()
-        self.url, self.headers = initializer.get_url_and_headers()
+        self.url, self.headers = initializer.get_url_and_headers("products")
 
     def response_handler(self):
         response = requests.get(self.url, headers=self.headers)
