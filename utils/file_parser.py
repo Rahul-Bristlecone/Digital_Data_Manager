@@ -1,10 +1,10 @@
-# Warehouse
+# Warehouse  #generic
 import configparser
 from pathlib import Path
 
 class FileParser:
     """
-    Class to parse the content of configuration file
+    Class to read the content of configuration file
 
     Method
     ------
