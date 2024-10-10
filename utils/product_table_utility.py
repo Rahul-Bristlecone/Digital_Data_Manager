@@ -16,6 +16,8 @@ class ProductTableInitializer:
             endpoint = self.fetch["ABS_warehouse_hostname"]["orders_endpoint"]
         elif endpoint_type == "products":
             endpoint = self.fetch["ABS_warehouse_hostname"]["products_endpoint"]
+        elif endpoint_type == "downloads":
+            endpoint = self.fetch["ABS_warehouse_hostname"]["downloads_endpoint"]
 
         url = "http://" + hostname + ":" + port + endpoint
         headers = {
