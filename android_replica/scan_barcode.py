@@ -43,9 +43,8 @@ class ScanBarcode:
                                           "Product code" : barcodes[1],
                                           "Product description" : barcodes[3]
                                          }
-                        return product_detail
-                else:
-                    return self.input_barcode
+                        return product_detail, "success"
+                return self.input_barcode, "failure"
 
 if __name__ == '__main__':
     user_input = input("Enter Barcode: ")
