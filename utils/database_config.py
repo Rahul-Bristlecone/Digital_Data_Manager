@@ -20,8 +20,7 @@ class DatabaseConfiguration:
     config_directory = "config"
     config = configparser.ConfigParser()
 
-    def __init__(self, cfg=config_file):
-        self.cfg_file = cfg
+    def __init__(self):
         self.current_directory = Path(__file__).parent.parent
         self.config_file_path = self.current_directory.joinpath(self.config_directory).joinpath(self.config_file)
 
@@ -29,11 +28,15 @@ class DatabaseConfiguration:
         self.config.read(self.config_file_path)
 
     def db_config(self):
-        db_data = {'host': self.config['ABS_warehouse_hostname']['hostname'],
-                   'port': self.config['ABS_warehouse_hostname']['port'],
-                   'database': self.config['ABS_warehouse_hostname']['database'],
-                   'username': self.config['ABS_warehouse_hostname']['username'],
-                   'password': self.config['ABS_warehouse_hostname']['password']
-                   }
+        mc_connection = {'host': self.config['MC3000 server']['hostname'],
+                         'port': self.config['MC3000 server']['port'],
+                         }
 
-        return db_data
+        mysql_connection = {'host': self.config['MYSQL connection']['host'],
+                            'port': self.config['MYSQL connection']['port'],
+                            'database': self.config['MYSQL connection']['database'],
+                            'username': self.config['MYSQL connection']['username'],
+                            'password': self.config['MYSQL connection']['password']
+                            }
+
+        return mc_connection, mysql_connection
