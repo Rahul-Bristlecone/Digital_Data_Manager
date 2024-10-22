@@ -1,6 +1,6 @@
 # warehouse
 import requests
-from get_orders import GetOrders
+from get_list_of_orders import GetOrders
 from utils.product_table_utility import ProductTableInitializer
 
 

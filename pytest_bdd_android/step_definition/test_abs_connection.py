@@ -3,7 +3,7 @@ from pathlib import Path
 
 from pytest_bdd.types import GIVEN
 
-scenario_file = "connection.feature"
+scenario_file = "../abs_features/connection.feature"
 directory_path = "abs_features"
 
 parent_path = Path(__file__).resolve().parent

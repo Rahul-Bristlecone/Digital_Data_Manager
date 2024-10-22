@@ -1,4 +1,4 @@
-# warehouse
+# *** warehouse ***
 import json
 import pytest
 from android_replica.scan_barcode import ScanBarcode
