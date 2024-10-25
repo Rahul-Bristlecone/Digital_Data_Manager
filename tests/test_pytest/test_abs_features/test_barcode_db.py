@@ -1,4 +1,5 @@
-# mocking and patching using pytest
+# *** flipkart shipping ****
+# *** mocking and patching using pytest ***
 # as we are not using a separate db for testing, we will be using the mocking in this case
 # mocking simulate the behaviour of DB and other external objects
 # objects like cursor, fetch(all/one) are used to interacts with the DB
@@ -39,7 +40,7 @@ class MockConnection:
 
 def test_barcode_success(mocker):
     mocker.patch('android_replica.scan_barcode_db.BarcodeDB.connect_db',
-                 return_value=MockConnection([8982, 1434242, 434224]))
+                 return_value=MockConnection([8982, 1434242, 434224]))  # method to be patched with mocked data
     scanner = BarcodeDB(8982)
     result = scanner.scan_barcode()
     print(f"Test result: {result}")

@@ -1,12 +1,7 @@
 # warehouse
 import requests
-from pandas import ExcelFile
-
-from get_orders import GetOrders
+from get_list_of_orders import GetOrders
 from utils.product_table_utility import ProductTableInitializer
-
-
-
 
 
 class DownloadOrders:
@@ -46,7 +41,6 @@ class DownloadOrders:
             except requests.RequestException as e:
                 print("error fetching data for order id ",order_id , e)
                 continue
-
 
             with open(self.file_path, 'a') as download_file:
                 download_file.write(response.text)
